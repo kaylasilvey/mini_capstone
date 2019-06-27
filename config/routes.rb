@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   # EXAMPLE JSON ROUTE WITH API NAMESPACE
   namespace :api do
-    get "/product/:product_url" => "products#product_url_method"
-    get "/product" => "products#product_query_method"
+    get "/products/:id" => "products#show"
+    get "/products" => "products#index"
+    # get "/product" => "products#product_query_method"
     # get "/uppers_and_downers" => "products#uppers_and_downers_method"
     # get "/friskeywhiskey" => "products#whiskey_method"
     # get "/heart_butt" => "products#heart_butt_method"
@@ -13,6 +14,5 @@ Rails.application.routes.draw do
     # get "/home_sweet" => "products#home_sweet_method"
     # get "/crystal_heart" => "products#crystal_heart_method"
     # get "/death_of_magic" => "products#death_of_magic_method"
-    # get "/all_products" => "products#all_products_method"
   end
 end

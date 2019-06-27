@@ -1,19 +1,19 @@
 class Api::ProductsController < ApplicationController
-  def product_url_method
-    @product = Product.find_by(id: params["product_url"].to_i)
-    render "uppers_and_downers.json.jb"
+  def show
+    @product = Product.find_by(id: params["id"])
+    render "show.json.jb"
   end
 
-  def product_query_method
-    product = params["id"].to_i
-    @product = Product.find_by(id: product)
-    render "uppers_and_downers.json.jb"
-  end
-
-  def all_products_method
+  def index
     @products = Product.all
-    render "all_products.json.jb"
+    render "index.json.jb"
   end
+
+  # def product_query_method
+  #   product = params["id"].to_i
+  #   @product = Product.find_by(id: product)
+  #   render "uppers_and_downers.json.jb"
+  # end
 
   # def uppers_and_downers_method
   #   @product = Product.first

@@ -9,6 +9,18 @@ class Api::ProductsController < ApplicationController
     render "index.json.jb"
   end
 
+  def create
+    @product = Product.new(
+      id: params["id"],
+      name: params["name"],
+      price: params["price"],
+      image_url: params["image_url"],
+      description: params["description"],
+    )
+    @product.save
+    render "show.json.jb"
+  end
+
   # def product_query_method
   #   product = params["id"].to_i
   #   @product = Product.find_by(id: product)

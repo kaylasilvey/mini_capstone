@@ -9,13 +9,10 @@ Rails.application.routes.draw do
     post "/products" => "products#create"
     patch "/products/:id" => "products#update"
     delete "/products/:id" => "products#destroy"
-    # get "/product" => "products#product_query_method"
-    # get "/uppers_and_downers" => "products#uppers_and_downers_method"
-    # get "/friskeywhiskey" => "products#whiskey_method"
-    # get "/heart_butt" => "products#heart_butt_method"
-    # get "/trash_queen" => "products#trash_queen_method"
-    # get "/home_sweet" => "products#home_sweet_method"
-    # get "/crystal_heart" => "products#crystal_heart_method"
-    # get "/death_of_magic" => "products#death_of_magic_method"
+    get "/suppliers" => "suppliers#index"
+    get "/suppliers/:id" => "suppliers#show"
+    post "/suppliers" => "suppliers#create"
+    patch "/suppliers/:id" => "suppliers#update"
+    delete "/suppliers/:id" => "suppliers#destroy"
   end
 end

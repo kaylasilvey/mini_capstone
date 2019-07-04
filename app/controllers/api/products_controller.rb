@@ -31,8 +31,9 @@ class Api::ProductsController < ApplicationController
       id: params["id"],
       name: params["name"],
       price: params["price"],
-      image_url: params["image_url"],
+      #image: params["image_url"],
       description: params["description"],
+      supplier_id: params["supplier_id"],
     )
     if @product.save
       render "show.json.jb"
@@ -45,8 +46,9 @@ class Api::ProductsController < ApplicationController
     @product = Product.find_by(id: params["id"])
     @product.name = params["name"] || @product.name
     @product.price = params["price"] || @product.price
-    @product.image_url = params["image_url"] || @product.image_url
+    #@product.image_url = params["image_url"] || @product.image_url
     @product.description = params["description"] || @product.description
+    @product.supplier_id = params["supplier_id"] || @product.supplier_id
     if @product.save
       render "show.json.jb"
     else
@@ -59,45 +61,4 @@ class Api::ProductsController < ApplicationController
     @product.destroy
     render json: { message: "Product successfully destroyed.  Hope you knew what you were doing!" }
   end
-
-  # def product_query_method
-  #   product = params["id"].to_i
-  #   @product = Product.find_by(id: product)
-  #   render "uppers_and_downers.json.jb"
-  # end
-
-  # def uppers_and_downers_method
-  #   @product = Product.first
-  #   render "uppers_and_downers.json.jb"
-  # end
-
-  # def whiskey_method
-  #   @product = Product.second
-  #   render "uppers_and_downers.json.jb"
-  # end
-
-  # def heart_butt_method
-  #   @product = Product.third
-  #   render "uppers_and_downers.json.jb"
-  # end
-
-  # def trash_queen_method
-  #   @product = Product.fourth
-  #   render "uppers_and_downers.json.jb"
-  # end
-
-  # def home_sweet_method
-  #   @product = Product.fifth
-  #   render "uppers_and_downers.json.jb"
-  # end
-
-  # def crystal_heart_method
-  #   @product = Product
-  #   render "uppers_and_downers.json.jb"
-  # end
-
-  # def death_of_magic_method
-  #   @product = Product.last
-  #   render "uppers_and_downers.json.jb"
-  # end
 end

@@ -1,14 +1,19 @@
 class Api::OrdersController < ApplicationController
   def create
-    order = Order.new(
+    product = Product.find_by(id: params["product_id"])
+    subtotal_equation = product.price * params["quantity"].to_i
+    tax_equation = product.tax * params["quantity"].to_i
+    total_equation = product.total * params["quantity"].to_i
+
+    @order = Order.new(
       user_id: current_user.id,
       product_id: params["product_id"],
       quantity: params["quantity"],
-      subtotal: Product.find_by(id: params["product_id"]).price,
-      tax: Product.find_by(id: params["product_id"]).price * 0.105,
-      total: Product.find_by(id: params["product_id"]).price + Product.find_by(id: params["product_id"]).price * 0.105,
+      subtotal: subtotal_equation,
+      tax: tax_equation,
+      total: total_equation,
     )
-    if order.save
+    if @order.save
       render json: { message: "Order added to cart" }
     else
       render json: { errors: order.errors.full_messages }, status: :bad_request

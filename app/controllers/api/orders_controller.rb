@@ -2,14 +2,14 @@ class Api::OrdersController < ApplicationController
   before_action :authenticate_user
 
   def create
-    product = Product.find_by(id: params["product_id"])
+    product = Product.find_by(id: params[:product_id])
     subtotal_equation = product.price * params["quantity"].to_i
     tax_equation = product.tax * params["quantity"].to_i
     total_equation = product.total * params["quantity"].to_i
 
     @order = Order.new(
       user_id: current_user.id,
-      product_id: params["product_id"],
+      product_id: params[:product_id],
       quantity: params["quantity"],
       subtotal: subtotal_equation,
       tax: tax_equation,

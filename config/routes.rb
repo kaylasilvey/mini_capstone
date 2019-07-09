@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     post "/sessions" => "sessions#create"
     post "/users" => "users#create"
 
+    post "/orders" => "orders#create"
+    get "/orders" => "orders#index"
+    get "/orders/:id" => "orders#show"
+
     get "/products" => "products#index"
     get "/products/:id" => "products#show"
     post "/products" => "products#create"

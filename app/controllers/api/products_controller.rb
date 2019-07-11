@@ -25,6 +25,10 @@ class Api::ProductsController < ApplicationController
       @products = @products.order(id: :asc)
     end
 
+    if params[:category]
+      @products = Category.find_by(name: params[:category]).products
+    end
+
     render "index.json.jb"
   end
 
@@ -33,7 +37,7 @@ class Api::ProductsController < ApplicationController
       id: params["id"],
       name: params["name"],
       price: params["price"],
-      #image: params["image_url"],
+      image: params["image_url"],
       description: params["description"],
       supplier_id: params["supplier_id"],
     )
@@ -48,7 +52,7 @@ class Api::ProductsController < ApplicationController
     @product = Product.find_by(id: params["id"])
     @product.name = params["name"] || @product.name
     @product.price = params["price"] || @product.price
-    #@product.image_url = params["image_url"] || @product.image_url
+    @product.image_url = params["image_url"] || @product.image_url
     @product.description = params["description"] || @product.description
     @product.supplier_id = params["supplier_id"] || @product.supplier_id
     if @product.save

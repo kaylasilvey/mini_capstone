@@ -11,7 +11,14 @@ class Api::CartedProductsController < ApplicationController
   end
 
   def index
-    @carted_products = CartedProduct.where(user_id: current_user.id)
+    @carted_products = CartedProduct.where(user_id: current_user.id, status: "carted")
     render "index.json.jb"
+  end
+
+  def destroy
+    @carted_products = CartedProduct.find_by(user_id: current_user.id, product_id: params[:id])
+    @carted_products.status = "removed"
+    @carted_products.save
+    render json: { message: "Product removed from cart" }
   end
 end

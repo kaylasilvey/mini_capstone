@@ -1,5 +1,5 @@
 supplier = Supplier.create({
-  name: "Anna Lisa Schneider",
+  name: "Anna Lisa Illustration",
   email: "annalisaillo@gmail.com",
   phone_number: "555-666-777",
 })

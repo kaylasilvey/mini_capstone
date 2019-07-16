@@ -14,8 +14,9 @@
   </div>
   <div>
     Supplier: <select name="supplier_id">
-      <option value="1">Anna Lisa Schneider</option>
-      <option value="2">Threadless</option>
+      <% @supplier.each do |supplier| %>
+        <option value="<%= supplier.id %>"><%= supplier.name %></option>
+        <% end %>
     </select>
   </div>
   <input type="submit" value="Create New Product">

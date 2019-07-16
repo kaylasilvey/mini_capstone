@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
+    #put images model link in controller to access images in the index/show/new
     render "index.html.erb"
   end
 
@@ -10,6 +11,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @supplier = Supplier.all
     render "new.html.erb"
   end
 
@@ -21,6 +23,6 @@ class ProductsController < ApplicationController
       supplier_id: params["supplier_id"],
     )
     @product.save
-    redirect_to "/products"
+    redirect_to "/products/#{@product.id}"
   end
 end

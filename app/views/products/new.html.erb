@@ -1,0 +1,22 @@
+<h1>New Product</h1>
+<form action="/products" method="post">
+  <div>
+    Name: <input type="text" name="name">
+  </div>
+  <div>
+    Price: <input type="text" name="price">
+  </div>
+  <div>
+    Description: 
+    <br>
+    <textarea cols="30" rows="10" name="description">
+    </textarea>
+  </div>
+  <div>
+    Supplier: <select name="supplier_id">
+      <option value="1">Anna Lisa Schneider</option>
+      <option value="2">Threadless</option>
+    </select>
+  </div>
+  <input type="submit" value="Create New Product">
+</form>

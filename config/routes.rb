@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "/products" => "products#index"
+  get "/products/new" => "products#new"
+  get "/products/:id" => "products#show"
+  post "/products" => "products#create"
+
   namespace :api do
     post "/sessions" => "sessions#create"
     post "/users" => "users#create"
@@ -19,8 +24,8 @@ Rails.application.routes.draw do
     patch "/suppliers/:id" => "suppliers#update"
     delete "/suppliers/:id" => "suppliers#destroy"
 
-    post "/cart" => "carted_products#create"
-    get "/cart" => "carted_products#index"
-    delete "/cart/:id" => "carted_products#destroy"
+    post "/carted_products" => "carted_products#create"
+    get "/carted_products" => "carted_products#index"
+    delete "/carted_products/:id" => "carted_products#destroy"
   end
 end

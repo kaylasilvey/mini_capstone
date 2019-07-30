@@ -1,6 +1,14 @@
 class Api::ProductsController < ApplicationController
   before_action :authenticate_admin, except: [:index, :show]
 
+  # def image_url
+  #   if images.length > 0 && images[0].url
+  #     images[0].url
+  #   else
+  #     "https://www.hutchinsontires.com/helpers/img/no_image.jpg"
+  #   end
+  # end
+
   def show
     @product = Product.find_by(id: params["id"])
     render "show.json.jb"
@@ -37,11 +45,14 @@ class Api::ProductsController < ApplicationController
       id: params["id"],
       name: params["name"],
       price: params["price"],
-      image: params["image_url"],
       description: params["description"],
       supplier_id: params["supplier_id"],
     )
     if @product.save
+      Image.create(
+        url: params[:image_url],
+        product_id: @product.id,
+      )
       render "show.json.jb"
     else
       render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
@@ -52,7 +63,7 @@ class Api::ProductsController < ApplicationController
     @product = Product.find_by(id: params["id"])
     @product.name = params["name"] || @product.name
     @product.price = params["price"] || @product.price
-    @product.image_url = params["image_url"] || @product.image_url
+    # @product.image_url = params["image_url"] || @product.image_url
     @product.description = params["description"] || @product.description
     @product.supplier_id = params["supplier_id"] || @product.supplier_id
     if @product.save

@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
-    #put images model link in controller to access images in the index/show/new
     render "index.html.erb"
   end
 
@@ -17,13 +16,21 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(
+      id: params["id"],
       name: params["name"],
       price: params["price"],
       description: params["description"],
       supplier_id: params["supplier_id"],
     )
-    @product.save
-    redirect_to "/products/#{@product.id}"
+    if @product.save
+      Image.create(
+        url: params[:image_url],
+        product_id: @product.id,
+      )
+      render "show.html.erb"
+    else
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -46,5 +53,13 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @product.destroy
     redirect_to "/products"
+  end
+
+  def image_url
+    if images.length > 0 && images[0].url
+      images[0].url
+    else
+      "https://www.hutchinsontires.com/helpers/img/no_image.jpg"
+    end
   end
 end

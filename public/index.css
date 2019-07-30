@@ -1,0 +1,30 @@
+
+body {
+  font-family: Helvetica,"Trebuchet MS",Arial,sans-serif;
+  background-image: url('pink dust.png')
+}
+
+.navbar-brand {
+  font-family: 'Fascinate', cursive;
+  font-size: 3em;
+  color: #1a1a1a;
+  text-shadow: 2px 2px #b3b3ff;
+}
+
+.navbar-nav {
+  font-family: 'Fascinate', cursive;
+  font-size: 1.5em;
+}
+
+.card {
+  background-color: #1a0013;
+  color: #b3b3ff;
+  text-shadow: 1px 1px #1a1a1a;
+}
+
+.form-group {
+  font-family: 'Fascinate', cursive;
+  font-size: 1.5em;
+  color: #ff33cc;
+  text-shadow: 2px 2px #000000;
+}

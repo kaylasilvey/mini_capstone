@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   def current_user
+    return User.first #delete this after frontend is set up!
     auth_headers = request.headers["Authorization"]
     if auth_headers.present? && auth_headers[/(?<=\A(Bearer ))\S+\z/]
       token = auth_headers[/(?<=\A(Bearer ))\S+\z/]
@@ -30,6 +31,14 @@ class ApplicationController < ActionController::Base
   def authenticate_admin
     unless current_user && current_user.admin
       render json: {}, status: :unauthorized
+    end
+  end
+
+  def image_url
+    if images.length > 0 && images[0].url
+      images[0].url
+    else
+      "https://www.hutchinsontires.com/helpers/img/no_image.jpg"
     end
   end
 end
